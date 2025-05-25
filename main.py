@@ -61,3 +61,11 @@ while True:
         print(mouse)
     pygame.display.update() # updatujeme vykreslené okno
     clock.tick(1) # herní smyčka proběhne maximálně 5x za sekundu
+
+
+
+# TODO list
+#   vytvorit group tlačítek
+#   připravit hudbu
+#   rozmyšlení animace tlačítek
+#   vyresit ukazatel postupu
