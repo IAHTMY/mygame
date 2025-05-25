@@ -69,3 +69,5 @@ while True:
 #   připravit hudbu
 #   rozmyšlení animace tlačítek
 #   vyresit ukazatel postupu
+
+#   parapetry tlačítek 39*23 (stará verze někdy i 41*23)
