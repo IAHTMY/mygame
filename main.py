@@ -11,9 +11,9 @@ class Player(pygame.sprite.Sprite):
 class Button(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load("kaktus.png").convert_alpha()
+#       self.image = pygame.image.load("kaktus.png").convert_alpha()
 #       self.image = pygame.transform.scale(self.image,(size, size))
-        self.rect = self.image.get_rect(bottomleft = (600, 0.75*window_height))
+#       self.rect = self.image.get_rect(bottomleft = (600, 0.75*window_height))
 #       but_1 = pygame.image.load("but_1.png")
 #       
 #       self.walking_images = [man_1, man_2, man_3, man_4]
@@ -71,3 +71,5 @@ while True:
 #   vyresit ukazatel postupu
 
 #   parapetry tlačítek 39*23 (stará verze někdy i 41*23)
+#   užitečné
+#   https://www.pygame.org/docs/py-modindex.html
