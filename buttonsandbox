@@ -1,6 +1,14 @@
 import sys
 import pygame
 
+"""
+https://www.pygame.org/docs/ref/mouse.html#pygame.mouse.get_pressed
+https://thepythoncode.com/article/make-a-button-using-pygame-in-python
+https://www.geeksforgeeks.org/pygame-surface-blit-function/
+https://www.pygame.org/docs/tut/tom_games4.html
+"""
+
+
 # Configuration
 pygame.init()
 fps = 60

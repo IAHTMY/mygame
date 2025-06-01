@@ -22,6 +22,18 @@ class Button(pygame.sprite.Sprite):
     def update(self):
         pass
 
+names = ["1b.png", "2b.png", "3b.png", "4b.png", "5b.png", "6b.png", "7b.png", "8b.png", "9b.png", "10b.png", 
+        "11b.png", "12b.png", "13b.png", "14b.png", "15b.png", "16b.png", "17b.png", "18b.png", "19b.png", "20b.png", 
+        "21b.png", "22b.png", "23b.png", "24b.png", "25b.png"]
+functions = ["**(1/2)", "**2", " ", "o", " ", "7", "8", "9", "d", "c", 
+             "4", "5", "6", "*", "/", "1", "2", "3", "+", "-", 
+             "0", "00", " ", "a", "e", ]
+# o = off, d = delete, c = all clear, a = answer, e = execute (=)
+
+for i in range (0, 24):
+        buttons_surface = pygame.image.load(f"material/buttons/{names[i]}")
+x = 40
+y = 250
 buttons_group = pygame.sprite.Group()
 def is_collision():
     if pygame.sprite.spritecollide(mouse, buttons_group, False): # False na konci určuje, zda-li má kolidující obstacle zabít
@@ -30,7 +42,6 @@ def is_collision():
     return True
 
 mouse = pygame.mouse.get_pos()
-
 
 calculator_surface = pygame.image.load("material/protofin_25_05_25.png")
 calculator_surface = pygame.transform.scale(calculator_surface, (500,600))
@@ -58,7 +69,16 @@ while True:
     if game_active:            
         # pozadí
         screen.blit(calculator_surface,(0,0)) # položíme sky_surface na souřadnice [0,0]
+        for j in range (1, 5):
+            for i in range (0, 24):
+                buttons_surface.blit(names[i], (x,y))
+            x += 84
+        x == 40
+        y += 52
+        buttons_surface.blit()
+        mouse = pygame.mouse.get_pos()
         print(mouse)
+
     pygame.display.update() # updatujeme vykreslené okno
     clock.tick(1) # herní smyčka proběhne maximálně 5x za sekundu
 
