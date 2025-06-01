@@ -33,7 +33,7 @@ names = ["1b.png", "2b.png", "3b.png", "4b.png", "5b.png", "6b.png", "7b.png", "
         "21b.png", "22b.png", "23b.png", "24b.png", "25b.png"]
 functions = ["**(1/2)", "**2", " ", "o", " ", "7", "8", "9", "d", "c", 
              "4", "5", "6", "*", "/", "1", "2", "3", "+", "-", 
-             "0", "00", " ", "a", "e", ]
+             "0", "00", " ", "a", "e"]
 # o = off, d = delete, c = all clear, a = answer, e = execute (=)
 
 for i in range (0, 24):
