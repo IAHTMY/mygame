@@ -19,7 +19,13 @@ class Button(pygame.sprite.Sprite):
 #       self.walking_images = [man_1, man_2, man_3, man_4]
 #       self.walking_index = 0
 
-    def update(self):
+    def update(self, events):
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                 if self.rect.collidepoint(event.pos):
+                    self.onClick()
+    
+    def onClick(self):
         pass
 
 names = ["1b.png", "2b.png", "3b.png", "4b.png", "5b.png", "6b.png", "7b.png", "8b.png", "9b.png", "10b.png", 
@@ -36,12 +42,11 @@ x = 40
 y = 250
 buttons_group = pygame.sprite.Group()
 def is_collision():
-    if pygame.sprite.spritecollide(mouse, buttons_group, False): # False na konci určuje, zda-li má kolidující obstacle zabít
+    if pygame.sprite.spritecollide(buttons_group, False): # False na konci určuje, zda-li má kolidující obstacle zabít
         pass
         return False
     return True
 
-mouse = pygame.mouse.get_pos()
 
 calculator_surface = pygame.image.load("material/protofin_25_05_25.png")
 calculator_surface = pygame.transform.scale(calculator_surface, (500,600))
@@ -50,11 +55,22 @@ window_width = 500
 window_height = 600
 screen = pygame.display.set_mode((window_width, window_height))
 clock = pygame.time.Clock()
+
+
+fronta = []
+print(eval(""))
+
+exec("""
+a = 7
+b = 8
+print("vysledek: ", a*b)
+""")
+
 while True:
 
     # zjistíme co dělá hráč za akci
     for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
+        if event.type == pygame.QUIT:
             pygame.quit() # zavřeme herní okno
             exit() # úplně opustíme herní smyčku, celý program se ukončí
         
@@ -80,7 +96,7 @@ while True:
         print(mouse)
 
     pygame.display.update() # updatujeme vykreslené okno
-    clock.tick(1) # herní smyčka proběhne maximálně 5x za sekundu
+    clock.tick(5) # herní smyčka proběhne maximálně 5x za sekundu
 
 
 
