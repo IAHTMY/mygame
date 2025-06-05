@@ -60,6 +60,11 @@ def calc():
         zelda.play()
     if vysledek == 666:
         demon.play()
+    if vysledek == něco:
+        pass # zde by se zpustilo minigame dinogame, pojmenovat podle Tuky
+
+
+
 
     if vysledek == 215396891: #solar panel easter egg, čislo 215396891
         never.play()
@@ -70,6 +75,8 @@ names = ["1b.png", "2b.png", "3b.png", "4b.png", "5b.png", "6b.png", "7b.png", "
 functions = ["**(1/2)", "**2", " ", "o", " ", "7", "8", "9", "d", "c", 
              "4", "5", "6", "*", "/", "1", "2", "3", "+", "-", 
              "0", "00", " ", "a", "e"]
+
+eval(functions)
 # o = off, d = delete, c = all clear, a = answer, e = execute (=)
 
 for i in range (0, 24):
