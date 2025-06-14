@@ -29,11 +29,10 @@ doppler = pygame.mixer.Sound("material/music/doppler.mp3")
 doppler.set_volume(0.2)
 zelda = pygame.mixer.Sound("material/music/zelda.mp3")
 demon = pygame.mixer.Sound("material/music/demon.mp3")
-demon = pygame.mixer.Sound("material/music/demon.mp3")
-demon = pygame.mixer.Sound("material/music/demon.mp3")
 never = pygame.mixer.Sound("material/music/never.mp3")
 never.set_volume(0.7)
 
+# REAKCE NA INPUTY
 def calc(): 
     znak = fronta[-1]
     if znak == "o":
@@ -104,7 +103,6 @@ def calc():
                         self.apply_gravity()
                         self.animation_state()
 
-                    
                 class Obstacle(pygame.sprite.Sprite):
                     def __init__(self):
                         super().__init__()
@@ -239,22 +237,20 @@ class Button(pygame.sprite.Sprite):
         super().__init__()
         self.image=pygame.image.load(f"material/buttons/{name}")
         self.rect=self.image.get_rect(topleft=(pos_x,pos_y))
-    
-
-                        
+   
 # o = off, d = delete, c = all clear, a = answer, e = execute (=)
 
 x = 32
 y = 308
 buttons_group = pygame.sprite.Group()
-for i in range(5):
-    for l in range(5):
-        buttons_group.add(Button(names[i], ))
+id = 0
+for _ in range(5):
+    for _ in range(5):
+        buttons_group.add(Button(names[id], x, y))
+        id += 1
         x += 88
     x == 32
     y += 56
-
-
     
 mouse = pygame.mouse.get_pos()
 
@@ -266,7 +262,7 @@ def is_collision():
 window_width = 500
 window_height = 600
 
-calculator_surface = pygame.image.load("material/protofin_25_05_25.png")
+calculator_surface = pygame.image.load("material/protofin_14_06_25.png")
 calculator_surface = pygame.transform.scale(calculator_surface, (window_width, window_height))
 
 screen = pygame.display.set_mode((window_width, window_height))
@@ -287,14 +283,8 @@ while True:
             
     screen.blit(calculator_surface,(0,0)) # položíme pozadí na souřadnice [0,0]
 
-    
-    pygame.display.update() # updatujeme vykreslené okno
-    clock.tick(60) # herní smyčka proběhne maximálně 5x za sekundu
-
-# urgent, displej irl funkční, ukazuje to co je potřeba
+    pygame.display.update()
+    clock.tick(60)
 
 # TODO list
-#   vytvorit group tlačítek
-#   rozmyšlení animace tlačítek
-#   vyresit ukazatel postupu
-#   https://www.pygame.org/docs/py-modindex.html
+#   vytvořit scénář, kdy je výsledek moc dlouhý/zadává se moc věcí do calc/ provedese nedefinovaná operace (1/0, odmocňování -n)
