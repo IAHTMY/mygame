@@ -287,4 +287,4 @@ while True:
     clock.tick(60)
 
 # TODO list
-#   vytvořit scénář, kdy je výsledek moc dlouhý/zadává se moc věcí do calc/ provedese nedefinovaná operace (1/0, odmocňování -n)
+#   vytvořit scénář, kdy je výsledek moc dlouhý/zadává se moc věcí do calc/ provede se nedefinovaná operace (1/0, odmocňování -n)
