@@ -19,8 +19,8 @@ if color_index == 5:
     color_index = 0
 color = color_set[color_index]
 text_font = pygame.font.Font("material/techfont.ttf",50) # 100 je velikost písma
-text_surface = text_font.render(f"{obrazovka}", True, color) # text, anti-aliasing, černá barva písma
-text_rect = text_surface.get_rect(topleft = (62, 62)) # kam se to má vykreslit
+# text_surface = text_font.render(f"{obrazovka}", True, color) # text, anti-aliasing, černá barva písma
+# text_rect = text_surface.get_rect(topleft = (62, 62)) # kam se to má vykreslit
 
 # HUDBA
 bg_music = pygame.mixer.Sound("material/music/elevator.mp3")
@@ -34,6 +34,9 @@ never.set_volume(0.7)
 
 # REAKCE NA INPUTY
 def calc(): 
+    global obrazovka
+    global answer
+
     znak = fronta[-1]
     if znak == "o":
         pygame.quit()
@@ -48,8 +51,7 @@ def calc():
             fronta.pop()
 
     elif znak == "e": # tady bude problém s ukládáním proměnné i nad jedno použití této funkce (aby to answer přežilo ceký cyklus calc() bez toho, aby se znovu vymazal)
-        eval(obrazovka)
-        answer = obrazovka
+        answer = eval(obrazovka) 
         fronta.pop()
         # department eastereggů
         if obrazovka == 2:
@@ -187,7 +189,7 @@ def calc():
                         if counter > 120:
                             counter = 0
                             obstacle_group.add(Obstacle())
-                            
+                             
                         else:
                             counter += 1
 
@@ -217,11 +219,11 @@ def calc():
             exec(dino)
 
     elif znak == "a":
-        fronta.append(answer)
         fronta.pop()
+        fronta.append(answer)
 
     obrazovka = "".join(fronta)
-    print(obrazovka)
+    print("obrazovka:", obrazovka)
 
 names = ["1b.png", "2b.png", "3b.png", "4b.png", "5b.png", "6b.png", "7b.png", "8b.png", "9b.png", "10b.png", 
         "11b.png", "12b.png", "13b.png", "14b.png", "15b.png", "16b.png", "17b.png", "18b.png", "19b.png", "20b.png", 
@@ -233,10 +235,14 @@ functions = ["**(1/2)", "**2", " ", " ", "o", "7", "8", "9", "d", "c",
 buttons_surface = []
 
 class Button(pygame.sprite.Sprite): 
-    def __init__(self, name,pos_x, pos_y):
+    def __init__(self, index, pos_x, pos_y):
         super().__init__()
-        self.image=pygame.image.load(f"material/buttons/{name}")
+        self.image=pygame.image.load(f"material/buttons/{names[index]}")
         self.rect=self.image.get_rect(topleft=(pos_x,pos_y))
+
+        self.index = index 
+
+        # print("button init", pos_x, pos_y)
    
 # o = off, d = delete, c = all clear, a = answer, e = execute (=)
 
@@ -246,18 +252,18 @@ buttons_group = pygame.sprite.Group()
 id = 0
 for _ in range(5):
     for _ in range(5):
-        buttons_group.add(Button(names[id], x, y))
+        buttons_group.add(Button(id, x, y))
         id += 1
         x += 88
-    x == 32
+    x = 32
     y += 56
     
-mouse = pygame.mouse.get_pos()
-
-def is_collision():
-    if pygame.sprite.spritecollide(mouse, buttons_group, False):
-        fronta.append(functions[names.index(buttons_group)])
-        calc()
+def is_collision(position):
+    for button in buttons_group.sprites():
+        # if pygame.sprite.spritecollide(position, button, False):
+        if button.rect.collidepoint(position):
+            fronta.append(functions[button.index])
+            calc()
 
 window_width = 500
 window_height = 600
@@ -269,9 +275,6 @@ screen = pygame.display.set_mode((window_width, window_height))
 clock = pygame.time.Clock()
 
 while True:
-
-    buttons_group.draw(screen)
-    buttons_group.update()
     # zjistíme co dělá hráč za akci
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -279,10 +282,22 @@ while True:
             exit() # úplně opustíme herní smyčku, celý program se ukončí
         
         if event.type == pygame.MOUSEBUTTONDOWN:
-            is_collision()
-            
+            is_collision(event.pos)
+    
+    screen.fill("black")
     screen.blit(calculator_surface,(0,0)) # položíme pozadí na souřadnice [0,0]
 
+    buttons_group.draw(screen)
+    buttons_group.update()
+
+    #TEXT na kalkulacke
+    print("text:", obrazovka)
+    calculator_text_surface = text_font.render(f"OUT: {obrazovka}", True, "black")
+    screen.blit(calculator_text_surface, (62, 62))
+
+
+
+    
     pygame.display.update()
     clock.tick(60)
 
