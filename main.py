@@ -226,7 +226,7 @@ def calc():
 names = ["1b.png", "2b.png", "3b.png", "4b.png", "5b.png", "6b.png", "7b.png", "8b.png", "9b.png", "10b.png", 
         "11b.png", "12b.png", "13b.png", "14b.png", "15b.png", "16b.png", "17b.png", "18b.png", "19b.png", "20b.png", 
         "21b.png", "22b.png", "23b.png", "24b.png", "25b.png"]
-functions = ["**(1/2)", "**2", " ", "o", " ", "7", "8", "9", "d", "c", 
+functions = ["**(1/2)", "**2", " ", " ", "o", "7", "8", "9", "d", "c", 
              "4", "5", "6", "*", "/", "1", "2", "3", "+", "-", 
              "0", "00", " ", "a", "e"]
 
@@ -288,3 +288,5 @@ while True:
 
 # TODO list
 #   vytvořit scénář, kdy je výsledek moc dlouhý/zadává se moc věcí do calc/ provede se nedefinovaná operace (1/0, odmocňování -n)
+# dle https://pythonbasics.org/try-except/
+# místo 3b a 4b by so mohly udělat závorky ( a )
