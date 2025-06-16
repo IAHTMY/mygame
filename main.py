@@ -39,20 +39,25 @@ def calc():
 
     znak = fronta[-1]
     if znak == "o":
+        fronta.pop()
         pygame.quit()
         exit()
 
     elif znak == "d":
-        fronta.pop()
-        fronta.pop()
+        if len(fronta) == 1:
+            fronta.pop()
+        else:
+            fronta.pop()
+            fronta.pop()
 
     elif znak == "c":
         for _ in range(len(fronta)):
             fronta.pop()
 
     elif znak == "e": # tady bude problém s ukládáním proměnné i nad jedno použití této funkce (aby to answer přežilo ceký cyklus calc() bez toho, aby se znovu vymazal)
-        answer = eval(obrazovka) 
         fronta.pop()
+        answer = eval(obrazovka) 
+        
         # department eastereggů
         if obrazovka == 2:
             color += 1
