@@ -13,7 +13,7 @@ pygame.display.set_icon(calcicon)
 pygame.display.set_caption("Kalkulačka Gasio 123")
 
 # FONT 
-color_set = ["Black", "Blue", "Green", "Yellow", "Red", "Black"]
+color_set = ["black", "blue", "green", "yellow", "red", "black"]
 color_index = 0
 if color_index == 5:
     color_index = 0
@@ -25,6 +25,7 @@ text_font = pygame.font.Font("material/techfont.ttf",50) # 100 je velikost písm
 # HUDBA
 bg_music = pygame.mixer.Sound("material/music/elevator.mp3")
 bg_music.play(loops = -1)
+bg_music.set_volume(0.2)
 doppler = pygame.mixer.Sound("material/music/doppler.mp3")
 doppler.set_volume(0.2)
 zelda = pygame.mixer.Sound("material/music/zelda.mp3")
@@ -36,7 +37,7 @@ never.set_volume(0.7)
 def calc(): 
     global obrazovka
     global answer
-
+    global color_index
     znak = fronta[-1]
     if znak == "o":
         fronta.pop()
@@ -54,13 +55,34 @@ def calc():
         for _ in range(len(fronta)):
             fronta.pop()
 
-    elif znak == "e": # tady bude problém s ukládáním proměnné i nad jedno použití této funkce (aby to answer přežilo ceký cyklus calc() bez toho, aby se znovu vymazal)
+    elif znak == "a":
         fronta.pop()
-        answer = eval(obrazovka) 
+        fronta.append(answer)
+
+    elif znak == "e": # lze založit dovnitř for cyklu fci try a except pro syntax nebo value error
+        fronta.pop()
+        """
+        eval("answer = " + obrazovka) 
+        help = 0
+        number = [[]]
+        front = []
+        for i in obrazovka:
+            if i.isnumber():
+                number[help].append(int(i))
+            else:
+                number.append()
+                help += 1
+                front.append(i)
+        for i in number:
+            if front[0] == "*":
+"""
         
-        # department eastereggů
+        obrazovka = "".join(fronta)
+        obrazovka = eval((obrazovka))
+    
+    # department eastereggů
         if obrazovka == 2:
-            color += 1
+            color_index += 1
         if obrazovka == 1953:    
             doppler.play()
         if obrazovka == 58008:
@@ -70,7 +92,7 @@ def calc():
         if obrazovka == 1987:
             never.play()
         if obrazovka == 215396891: #solar panel easter egg, čislo 215396891, třeba zpusobem exec(celá dinogame)
-            
+        
             dino ="""
                 import random
                 class Player(pygame.sprite.Sprite): 
@@ -223,12 +245,10 @@ def calc():
                     clock.tick(60)"""
             exec(dino)
 
-    elif znak == "a":
-        fronta.pop()
-        fronta.append(answer)
 
     obrazovka = "".join(fronta)
-    print("obrazovka:", obrazovka)
+
+    print(color_index)
 
 names = ["1b.png", "2b.png", "3b.png", "4b.png", "5b.png", "6b.png", "7b.png", "8b.png", "9b.png", "10b.png", 
         "11b.png", "12b.png", "13b.png", "14b.png", "15b.png", "16b.png", "17b.png", "18b.png", "19b.png", "20b.png", 
@@ -236,8 +256,6 @@ names = ["1b.png", "2b.png", "3b.png", "4b.png", "5b.png", "6b.png", "7b.png", "
 functions = ["**(1/2)", "**2", " ", " ", "o", "7", "8", "9", "d", "c", 
              "4", "5", "6", "*", "/", "1", "2", "3", "+", "-", 
              "0", "00", " ", "a", "e"]
-
-buttons_surface = []
 
 class Button(pygame.sprite.Sprite): 
     def __init__(self, index, pos_x, pos_y):
@@ -248,9 +266,7 @@ class Button(pygame.sprite.Sprite):
         self.index = index 
 
         # print("button init", pos_x, pos_y)
-   
 # o = off, d = delete, c = all clear, a = answer, e = execute (=)
-
 x = 32
 y = 308
 buttons_group = pygame.sprite.Group()
@@ -273,7 +289,7 @@ def is_collision(position):
 window_width = 500
 window_height = 600
 
-calculator_surface = pygame.image.load("material/protofin_14_06_25.png")
+calculator_surface = pygame.image.load("material/protofin_25_05_25.png")
 calculator_surface = pygame.transform.scale(calculator_surface, (window_width, window_height))
 
 screen = pygame.display.set_mode((window_width, window_height))
@@ -297,16 +313,13 @@ while True:
 
     #TEXT na kalkulacke
     print("text:", obrazovka)
-    calculator_text_surface = text_font.render(f"OUT: {obrazovka}", True, "black")
+    calculator_text_surface = text_font.render(f"OUT: {obrazovka}", True, "black") # tady je potřeba přidat tu proměnnou barvu
     screen.blit(calculator_text_surface, (62, 62))
-
-
-
     
     pygame.display.update()
-    clock.tick(60)
+    clock.tick(5)
 
 # TODO list
-#   vytvořit scénář, kdy je výsledek moc dlouhý/zadává se moc věcí do calc/ provede se nedefinovaná operace (1/0, odmocňování -n)
+# vytvořit scénář, kdy je výsledek moc dlouhý/zadává se moc věcí do calc/ provede se nedefinovaná operace (1/0, odmocňování -n)
 # dle https://pythonbasics.org/try-except/
 # místo 3b a 4b by so mohly udělat závorky ( a )
