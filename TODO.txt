@@ -1,11 +1,12 @@
+NEFUNGUJE EVALUACE VÝSLEDKŮ V KALKULAČCE
 Nefunguje točení barev
-Nelícujou tlačítka s červenými kříži
-Nefunguje evaluace výsledku kalkulačky
-Chybí kontrola, aby nebylo v kalkulačce moc argumentů (if len(obrazovka)) > 10 atd
-Chybí adekvátní reakce pomocí try a except, když dojde k Value_error (1/0 apod)
+Nefunguje 100% kontrola pro len(obrazovka)
+Chtěl bych aby fungovalo dino, není čas
 
 Funguje:
 Generování tlačítek
 Celá kolize, přidávání znaků do fronty
 Generování textu
-Po zmáčknutí = se aktivují některé eastereggy (až na color, dino)
+Po zmáčknutí = se aktivují eastereggy
+Funguje (zatím ne na 100%) reakce pomocí try a except, když dojde k Value_error (1/0 apod)
+Font je funkční, chtěl jsem víc techno look, co se dá dělat
