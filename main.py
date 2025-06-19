@@ -95,6 +95,8 @@ def calc():
             """
             if len(fronta) != 0:
                 obrazovka = "".join(fronta)
+                print(obrazovka)
+                print(eval(obrazovka))
                 obrazovka = eval((obrazovka))
                 
         # department eastereggů
